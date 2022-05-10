@@ -5,3 +5,6 @@ create table member
     name varchar(255),
     primary key (id)
 )
+
+insert into member(name) values ( 'spring1' );
+insert into member(name) values ( 'spring2' );
