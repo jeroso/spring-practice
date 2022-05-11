@@ -57,6 +57,7 @@ public class JdbcMemberRepository implements MemberRepository {
         try {
             conn = getConnection();
             pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, id);
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 Member member = new Member();
@@ -66,6 +67,7 @@ public class JdbcMemberRepository implements MemberRepository {
             }else{
                 return Optional.empty();
             }
+
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }finally {
@@ -148,7 +150,7 @@ public class JdbcMemberRepository implements MemberRepository {
         }
         try {
             if (conn != null) {
-                conn.close();
+                close(conn);
             }
         } catch (SQLException e) {
             e.printStackTrace();
